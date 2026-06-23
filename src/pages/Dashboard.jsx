@@ -24,7 +24,9 @@ const Dashboard = () => {
 
     try {
       setForecastLoading(true)
-      const response = await fetch(`/api/weather/forecast/${weatherData.name}/`)
+      // const response = await fetch(`/api/weather/forecast/${weatherData.name}/`)
+      const BACKEND_URL = "https://your-weather-backend.onrender.com";
+      const response = await fetch.get(`${BACKEND_URL}/api/weather?location=${city}`);
       if (!response.ok) throw new Error('Failed to fetch forecast')
       const forecastData = await response.json()
       setForecast(forecastData)

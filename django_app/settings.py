@@ -27,11 +27,13 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'weather',
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -110,3 +112,7 @@ REST_FRAMEWORK = {
 
 OPENWEATHER_API_KEY = os.getenv('OPENWEATHER_API_KEY', '')
 WEATHER_CACHE_TIMEOUT = 3600
+
+CORS_ALLOWED_ORIGINS = [
+    "https://6a3a4398fe0d1f9b9a9e478a--spontaneous-alpaca-2f6b9f.netlify.app/",
+]
