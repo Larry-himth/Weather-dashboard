@@ -6,6 +6,7 @@ import ForecastCard from '../components/ForecastCard'
 import HistoricalChart from '../components/HistoricalChart'
 import DataExport from '../components/DataExport'
 import ThemeToggle from '../components/ThemeToggle'
+import { weatherAPI } from '../services/weatherAPI'
 
 const Dashboard = () => {
   const [weather, setWeather] = useState(null)
@@ -24,12 +25,8 @@ const Dashboard = () => {
 
     try {
       setForecastLoading(true)
-      // const response = await fetch(`/api/weather/forecast/${weatherData.name}/`)
-      const BACKEND_URL = "https://your-weather-backend.onrender.com";
-      const response = await fetch.get(`${BACKEND_URL}/api/weather?location=${city}`);
-      if (!response.ok) throw new Error('Failed to fetch forecast')
-      const forecastData = await response.json()
-      setForecast(forecastData)
+      const response = await weatherAPI.getForecast(weatherData.name)
+      setForecast(response.data)
     } catch (err) {
       console.error('Forecast fetch error:', err)
       setForecast(null)
