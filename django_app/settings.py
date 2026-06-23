@@ -16,10 +16,10 @@ SECRET_KEY = os.getenv('SECRET_KEY', 'django-insecure-development-key-change-in-
 
 DEBUG = os.getenv('DEBUG', 'True') == 'True'
 
-ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', 'localhost,127.0.0.1').split(',')
+ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', 'localhost,127.0.0.1,weather-dashboard-sw80.onrender.com').split(',')
 
 INSTALLED_APPS = [
-    'django.contrib.admin',
+    'django.contrib.admin','weather-dashboard-sw80.onrender.com'
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
