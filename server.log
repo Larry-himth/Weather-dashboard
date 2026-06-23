@@ -1,0 +1,9 @@
+Watching for file changes with StatReloader
+[19/Jun/2026 08:11:59] "GET / HTTP/1.1" 200 400
+[19/Jun/2026 08:12:05] "HEAD /static/assets/index-BD0-UPRw.css HTTP/1.1" 404 0
+Error searching locations: 401 Client Error: Unauthorized for url: https://api.openweathermap.org/data/2.5/find?q=kampala&appid=8d2f11ff8253f3d86ba9ea3db6f6d2fc&limit=5
+[19/Jun/2026 08:20:31] "GET /api/weather/search/?q=kampala HTTP/1.1" 200 16
+Error fetching current weather: 401 Client Error: Unauthorized for url: https://api.openweathermap.org/data/2.5/weather?q=kampala&appid=8d2f11ff8253f3d86ba9ea3db6f6d2fc&units=metric
+Error in current_weather: 401 Client Error: Unauthorized for url: https://api.openweathermap.org/data/2.5/weather?q=kampala&appid=8d2f11ff8253f3d86ba9ea3db6f6d2fc&units=metric
+Bad Request: /api/weather/current/kampala/
+[19/Jun/2026 08:20:32] "GET /api/weather/current/kampala/ HTTP/1.1" 400 161
