@@ -118,7 +118,7 @@ CORS_ALLOWED_ORIGINS = [
     origin.strip().rstrip('/')
     for origin in os.getenv(
         'CORS_ALLOWED_ORIGINS',
-        'https://6a3a4398fe0d1f9b9a9e478a--spontaneous-alpaca-2f6b9f.netlify.app',
+        'https://6a3a5c59cb0eb31dcfa678fc--spontaneous-alpaca-2f6b9f.netlify.app',
     ).split(',')
     if origin.strip()
 ]
