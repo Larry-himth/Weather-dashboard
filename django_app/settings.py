@@ -6,38 +6,36 @@ load_dotenv()
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-STATIC_URL = '/static/'
-
-STATICFILES_DIRS = [
-    BASE_DIR / "static",
-]
-
 SECRET_KEY = os.getenv('SECRET_KEY', 'django-insecure-development-key-change-in-production')
 
-DEBUG = os.getenv('DEBUG', 'True') == 'True'
+DEBUG = os.getenv('DEBUG', 'False') == 'True'
 
 ALLOWED_HOSTS = [
-    'localhost',
-    '127.0.0.1',
-    'weather-dashboard-sw80.onrender.com',
+    host.strip()
+    for host in os.getenv(
+        'ALLOWED_HOSTS',
+        'localhost,127.0.0.1,.onrender.com',
+    ).split(',')
+    if host.strip()
 ]
 
 INSTALLED_APPS = [
-    'django.contrib.admin','weather-dashboard-sw80.onrender.com'
+    'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
-    'weather',
     'corsheaders',
+    'weather',
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
-    'corheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -50,9 +48,8 @@ ROOT_URLCONF = 'django_app.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        # ADD BASE_DIR / "static" to this DIRS list right here:
         'DIRS': [
-            BASE_DIR / "weather" / "static",
+            BASE_DIR / 'weather' / 'static',
         ],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -96,9 +93,9 @@ USE_I18N = True
 USE_TZ = True
 
 STATIC_URL = '/static/'
-STATIC_ROOT = BASE_DIR / 'static'
+STATIC_ROOT = BASE_DIR / 'staticfiles'
 STATICFILES_DIRS = [
-    BASE_DIR / 'public',
+    BASE_DIR / 'weather' / 'static',
 ]
 
 MEDIA_URL = '/media/'
@@ -118,5 +115,12 @@ OPENWEATHER_API_KEY = os.getenv('OPENWEATHER_API_KEY', '')
 WEATHER_CACHE_TIMEOUT = 3600
 
 CORS_ALLOWED_ORIGINS = [
-    "https://6a3a4398fe0d1f9b9a9e478a--spontaneous-alpaca-2f6b9f.netlify.app/",
+    origin.strip().rstrip('/')
+    for origin in os.getenv(
+        'CORS_ALLOWED_ORIGINS',
+        'https://6a3a4398fe0d1f9b9a9e478a--spontaneous-alpaca-2f6b9f.netlify.app',
+    ).split(',')
+    if origin.strip()
 ]
+
+CSRF_TRUSTED_ORIGINS = CORS_ALLOWED_ORIGINS
